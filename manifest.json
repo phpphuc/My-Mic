@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "My Mic",
+  "version": "1.0",
+  "description": "Chuyển giọng nói thành văn bản vào bất kỳ tab nào",
+  "permissions": [
+    "tabs"
+    ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "main.html"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/dialog16.png",
+      "48": "images/dialog48.png",
+      "128": "images/dialog128.png"
+    }
+  }
+}
