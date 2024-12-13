@@ -2,9 +2,13 @@ const content = document.getElementById("content");
 let recognition;
 
 function startRecognition() {
+  var select_language = document.querySelector('#select-language');
+  var select_dialect = document.querySelector('#select_dialect');
+
   if ('webkitSpeechRecognition' in window) {
     recognition = new webkitSpeechRecognition();
-    recognition.lang = 'en-US';
+    recognition.lang = select_dialect.value || select_language.value || 'en-US';
+    // alert('recognition.lang: ' + recognition.lang);
     recognition.interimResults = true;
     recognition.continuous = true;
     recognition.maxAlternatives = 1;
