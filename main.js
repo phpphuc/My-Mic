@@ -29,9 +29,17 @@ function startRecognition() {
           content.innerHTML = interim_transcript;
         }
       }
-
-
     };
+
+    recognition.onerror = function(event) {
+      console.error('Speech recognition error:', event.error);
+    };
+
+    recognition.onend = function() {
+      isRecognitionActive = false;
+      console.log('Speech recognition ended');
+    };
+
     recognition.start();
   } else {
     alert('Trình duyệt của bạn không hỗ trợ Web Speech API');
