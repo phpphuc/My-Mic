@@ -1,10 +1,22 @@
 {
   "manifest_version": 3,
   "name": "My Mic",
-  "version": "1.0",
+  "version": "2.0",
   "description": "Chuyển giọng nói thành văn bản vào bất kỳ tab nào",
   "permissions": [
-    "tabs"
+    "scripting",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback",
+    "identity",
+    "identity.email",
+    "tabs",
+    "clipboardWrite",
+    "clipboardRead",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "idle",
+    "power"
     ],
   "host_permissions": [
     "<all_urls>"

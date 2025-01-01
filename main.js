@@ -29,6 +29,13 @@ function startRecognition() {
           content.innerHTML = interim_transcript;
         }
       }
+
+
+      if (final_transcript.length > 0) {
+				chrome.runtime.sendMessage({ type: 'insertText', text: final_transcript });
+        console.log('final:', final_transcript);
+        final_transcript = '';
+      }
     };
 
     recognition.onerror = function(event) {
