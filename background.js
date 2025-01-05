@@ -30,7 +30,8 @@ function insertTextToPage(text) {
         textarea.setRangeText(text, startPos, endPos, 'end');
       }
     } else {
-      alert('Hãy chọn một vùng nhập văn bản để chèn nội dung');
+      // alert('Hãy chọn một vùng nhập văn bản để chèn nội dung');
+      showToast('Hãy chọn một vùng nhập văn bản để chèn nội dung');
     }
   }
   console.log('textarea', text);
