@@ -28,6 +28,12 @@ function startRecognition() {
         if (content) {
           content.innerHTML = interim_transcript;
         }
+				chrome.tabs.query({active: true}, function(tabs) {
+					if (tabs[0]) {
+						chrome.tabs.sendMessage(tabs[0].id, { interim_transcript: interim_transcript });
+						console.log(tabs[0].url);
+					}
+				});
       }
 
 
