@@ -69,3 +69,34 @@ document.getElementById('stop-btn').addEventListener('click', () => {
 	}
 });
 
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const copyBtn = document.getElementById('copy-btn');
+  copyBtn.addEventListener('click', function() {
+    const contentDiv = document.getElementById('content');
+    const textToCopy = contentDiv.innerText || contentDiv.textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(textToCopy)
+        .then(() => console.log('Copied to clipboard successfully!'))
+        .catch(err => console.error('Error in copying text: ', err));
+    } else {
+      // Fallback method
+      const textarea = document.createElement('textarea');
+      textarea.value = textToCopy;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Copied to clipboard using execCommand!');
+      } catch (err) {
+        console.error('execCommand error', err);
+      }
+      document.body.removeChild(textarea);
+    }
+  });
+	const clearBtn = document.getElementById('clear-btn');
+  clearBtn.addEventListener('click', function() {
+    document.getElementById('content').innerHTML = '';
+  });
+});

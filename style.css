@@ -1,5 +1,4 @@
-
-            body {
+        body {
             background-color: #042743;
         }
 
@@ -63,9 +62,15 @@
           color:white;
           border:none;
         }
+        #copy-btn, #clear-btn{
+          padding:4px;
+            word-spacing: 5px;
+            background-color:cadetblue;
+          color:white;
+          border:none;
+        }
       .btn-group{
     position: absolute;
     bottom: 10px;
     left: 10px;
     margin: 6px;}
-
