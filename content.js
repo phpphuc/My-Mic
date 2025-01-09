@@ -19,6 +19,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         document.body.appendChild(tooltip);
       }
       tooltip.innerText = message.interim_transcript;
+
+      if (tooltipRemovalTimeout) clearTimeout(tooltipRemovalTimeout);
+      tooltipRemovalTimeout = setTimeout(() => {
+        if (tooltip && tooltip.parentNode) {
+          tooltip.parentNode.removeChild(tooltip);
+        }
+        tooltipRemovalTimeout = null;
+      }, 3000);
     }
   }
 });
