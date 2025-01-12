@@ -38,6 +38,10 @@ function startRecognition() {
 
 
       if (final_transcript.length > 0) {
+        if (findCommandInSpeech(final_transcript)){
+          final_transcript = "";
+        }
+
         var selection = window.getSelection();
 				var range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
 
