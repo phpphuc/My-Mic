@@ -25,9 +25,9 @@ function startRecognition() {
         }
       }
       if (interim_transcript.length > 0) {
-        if (content) {
-          content.innerHTML = interim_transcript;
-        }
+        // if (content) {
+        //   content.innerHTML = interim_transcript;
+        // }
 				chrome.tabs.query({active: true}, function(tabs) {
 					if (tabs[0]) {
 						chrome.tabs.sendMessage(tabs[0].id, { interim_transcript: interim_transcript });
@@ -38,6 +38,25 @@ function startRecognition() {
 
 
       if (final_transcript.length > 0) {
+        var selection = window.getSelection();
+				var range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+
+				if (!range || !content.contains(range.commonAncestorContainer)) {
+					range = document.createRange();
+					range.selectNodeContents(content);
+					range.collapse(false);
+					selection.removeAllRanges();
+					selection.addRange(range);
+				}
+
+				var textNode = document.createTextNode(final_transcript);
+				range.insertNode(textNode);
+
+				range.setStartAfter(textNode);
+				range.setEndAfter(textNode);
+				selection.removeAllRanges();
+				selection.addRange(range);
+
 				chrome.runtime.sendMessage({ type: 'insertText', text: final_transcript });
         console.log('final:', final_transcript);
         final_transcript = '';
