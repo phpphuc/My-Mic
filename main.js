@@ -6,7 +6,7 @@ let isCtrlShiftPressed = false;
 
 
 document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.shiftKey && !isRecognitionActive) {
+  if (e.ctrlKey && e.shiftKey && e.altKey && !isRecognitionActive) {
 		isCtrlShiftPressed = true;
 		startRecognition();
 		isRecognitionActive = true;
@@ -14,7 +14,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 document.addEventListener('keyup', async (e) => {
-  if (!e.ctrlKey || !e.shiftKey && isRecognitionActive) {
+  if (!e.ctrlKey || !e.shiftKey && !e.altKey && isRecognitionActive) {
 		if (recognition)
     recognition.stop();
   }
