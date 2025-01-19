@@ -1,6 +1,54 @@
 const content = document.getElementById("content");
 let recognition;
 
+let isRecognitionActive = false;
+let isCtrlShiftPressed = false;
+
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.shiftKey && !isRecognitionActive) {
+		isCtrlShiftPressed = true;
+		startRecognition();
+		isRecognitionActive = true;
+  }
+});
+
+document.addEventListener('keyup', async (e) => {
+  if (!e.ctrlKey || !e.shiftKey && isRecognitionActive) {
+		if (recognition)
+    recognition.stop();
+  }
+});
+
+
+async function callGeminiAPI(transcript) {
+  // `Convert the user's speech: ${transcript} to the corresponding command based on the defined phrases: ${commands.map(c => c.phrase).join(', ')}`
+	// const prompt = `Based on the user's speech: "${transcript}", return the closest matching speech from the following defined phrases: ${appConfig.commands.map(c => c.phrase).join(', ')}. For example, for the command { phrase: "^(?:start |open )?(?:a )?new tab$" }, the sample speech is: "Open a new tab". Do not provide any additional information or ask any questions. Only return the correct speech like athe sample speech above from matching phrase.`;
+	// Only return the matching phrase.`
+
+	const prompt = {
+		// instruction: `Convert the user's speech: ${transcript} to the corresponding command based on the defined phrases: ${commands.map(c => c.phrase).join(', ')}`
+		instruction: `Based on the user's speech: "${transcript}", return the closest matching speech from the following defined phrases: ${appConfig.commands.map(c => c.phrase).join(', ')}. For example, for the command { phrase: "^(?:start |open )?(?:a )?new tab$" }, the sample speech is: "Open a new tab". Do not provide any additional information or ask any questions. Only return the correct speech like athe sample speech above from matching phrase.`
+		// Only return the matching phrase.`
+	};
+
+	console.log('Prompt:', prompt);
+	// return;
+
+	  try {
+    const response = await fetch('http://localhost:3000', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    });
+    const data = await response.json();
+    console.log('Gemini API response:', data);
+    return data.response.trim();
+  } catch (error) {
+    console.error('Error calling Gemini API:', error);
+  }
+}
+
 function startRecognition() {
   var select_language = document.querySelector('#select-language');
   var select_dialect = document.querySelector('#select_dialect');
@@ -15,7 +63,7 @@ function startRecognition() {
 
     var final_transcript = "";
 
-    recognition.onresult =  function(event) {
+    recognition.onresult = async function(event) {
       var interim_transcript = '';
       for (var i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
@@ -38,6 +86,10 @@ function startRecognition() {
 
 
       if (final_transcript.length > 0) {
+        if (isCtrlShiftPressed) {
+          isCtrlShiftPressed = false;
+          final_transcript = await callGeminiAPI(final_transcript);
+        }
         if (findCommandInSpeech(final_transcript)){
           final_transcript = "";
         }
@@ -83,6 +135,7 @@ function startRecognition() {
 }
 
 document.getElementById('start-btn').addEventListener('click', () => {
+    isRecognitionActive = false;
 		startRecognition();
 });
 
