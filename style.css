@@ -1,76 +1,82 @@
         body {
-            background-color: #042743;
+          background-color: #042743;
         }
 
         .container {
-            width: 70%;
-            /* max-width: 800px; */
-            margin: 0 auto;
-            /* padding: 20px; */
-            background-color: white;
+          width: 70%;
+          /* max-width: 800px; */
+          margin: 0 auto;
+          /* padding: 20px; */
+          background-color: white;
         }
 
         #paper {
-            width: 70%;
-            min-height: 70vh;
-            margin: auto;
-            margin-top: 20px;
-            background-color: white;
+          width: 70%;
+          min-height: 70vh;
+          margin: auto;
+          margin-top: 20px;
+          background-color: white;
         }
 
         #paper::before {
-            content: '';
-            width: 2px;
-            height: 100%;
-            background-color: rgba(255, 0, 0, 0.6);
-            position: absolute;
-            top: 0;
-            left: 40px;
+          content: '';
+          width: 2px;
+          height: 100%;
+          background-color: rgba(255, 0, 0, 0.6);
+          position: absolute;
+          top: 0;
+          left: 40px;
         }
 
         #paper {
-            position: relative;
+          position: relative;
         }
 
 
 
         #paper {
-            padding-top: 20px;
-            padding-bottom: 40px;
+          padding-top: 20px;
+          padding-bottom: 40px;
         }
 
         #pattern {
-            min-height: 70vh;
-            background-image: repeating-linear-gradient(white 0px, white 24px, black 26px);
+          min-height: 70vh;
+          background-image: repeating-linear-gradient(white 0px, white 24px, black 26px);
         }
 
         #content {
-            padding-top: 1px;
-            padding-left: 56px;
-            padding-right: 16px;
-            padding-bottom: -1px;
-            line-height: 26px;
-            font-family: 'Dancing Script', cursive;
-            font-size: 19px;
-            letter-spacing: 1px;
-            word-spacing: 5px;
+          padding-top: 1px;
+          padding-left: 56px;
+          padding-right: 16px;
+          padding-bottom: -1px;
+          line-height: 26px;
+          font-family: 'Dancing Script', cursive;
+          font-size: 19px;
+          letter-spacing: 1px;
+          word-spacing: 5px;
         }
-        #start-btn, #stop-btn{
-          padding:4px;
-            word-spacing: 5px;
-            background-color: burlywood;
-          color:white;
-          border:none;
+
+        #start-btn,
+        #stop-btn {
+          padding: 4px;
+          word-spacing: 5px;
+          background-color: burlywood;
+          color: white;
+          border: none;
         }
-        #copy-btn, #clear-btn{
-          padding:4px;
-            word-spacing: 5px;
-            background-color:cadetblue;
-          color:white;
-          border:none;
+
+        #copy-btn,
+        #clear-btn {
+          padding: 4px;
+          word-spacing: 5px;
+          background-color: cadetblue;
+          color: white;
+          border: none;
         }
-      .btn-group{
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    margin: 6px;}
+
+        .btn-group {
+          position: absolute;
+          bottom: 10px;
+          left: 10px;
+          margin: 6px;
+        }
